@@ -16,6 +16,11 @@ app.use(express.json())
 const userRouter = require('./routes/users')
 app.use('/users', userRouter)
 
-app.listen(8080,  () => {
+app.use(express.json())
+
+const networkRouter = require('./routes/networks')
+app.use('/networks', networkRouter)
+
+app.listen(9000,  () => {
     console.log('Server started')
 })

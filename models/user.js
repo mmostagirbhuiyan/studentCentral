@@ -50,15 +50,10 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-    dateOfBirth:{
-        type: String,
-        required: true
-    },
-
-    phoneNumber:{
-        type: String,
-        required: true
-    },
+    myNetworks: {
+        type: Array,
+        required: false
+    }
 
 })
 
@@ -71,4 +66,4 @@ userSchema.methods.comparePassword = function(candidatePassword) {
         return false
 };
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('Users', userSchema)
