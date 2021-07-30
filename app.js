@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const url = 'mongodb://localhost/studentCentralDB'
+const url = 'mongodb://mongo:27017/studentCentralDB'
 
 const app = express()
 
