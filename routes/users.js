@@ -3,6 +3,15 @@ const router = express.Router()
 const User = require('../models/user')
 const fetch = require("node-fetch");
 
+Array.prototype.remove = function(value) {
+    for (var i = this.length; i--; )
+    {
+        if (this[i] === value) {
+            this.splice(i, 1);
+        }
+    }
+}
+
 router.get('/', async (req, res) => {
     try {
         const users = await User.find()
@@ -32,7 +41,7 @@ router.get('/homepage/:email', async (req, res) => {
         const users = await User.findOne(
             {'email': { $in: req.params.email}}
         )
-        res.json(users)
+        res.send(users)
     }catch (err){
         res.send('Error' + err)
     }
@@ -46,8 +55,13 @@ router.get('/homepage/:email/:getNetworks', async (req, res) => {
             const users = await User.findOne(
                 {'email': {$in: req.params.email}}
             )
-            const networks = users.myNetworks
-            res.json(networks)
+            var data = [];
+            for (const x of users.myNetworks){
+                const response = await fetch(`http://localhost:9000/networks/findNetworkByName/${x}`);
+                const myJson = await response.json();
+                data.push(myJson)
+            }
+            res.json(data)
         } catch (err) {
             res.send('Error' + err)
         }
@@ -121,9 +135,7 @@ router.patch('/removeNetwork/:email/:name', async (req, res) => {
         const users = await User.findOne(
             {'email': { $in: req.params.email}}
         )
-        users.myNetworks = users.myNetworks.filter(function (item){
-            return item !== req.params.name
-        })
+        users.myNetworks = users.myNetworks.remove(req.params.name)
         const u1 = await users.save()
         res.json(u1.myNetworks)
     }catch (err){
