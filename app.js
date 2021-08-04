@@ -11,6 +11,10 @@ con.on('open', () => {
     console.log('connected...')
 })
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 app.use(express.json())
 
 const userRouter = require('./routes/users')
