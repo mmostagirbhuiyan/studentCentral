@@ -27,6 +27,7 @@ router.post('/createNetwork', async (req, res) => {
         name: req.body.name,
         course: req.body.course,
         semester: req.body.semester,
+        description: req.body.description,
         accessible: req.body.accessible,
         link: req.body.link
     })
@@ -101,7 +102,7 @@ router.get('/findNetworkBySemester/:semester', async (req, res) => {
                     name: value.name,
                     link: value.link,
                     course: value.course,
-                    semester: value.semester
+                    semester: value.semester,
                 }
             })
         };

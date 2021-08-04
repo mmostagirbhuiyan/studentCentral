@@ -40,6 +40,11 @@ const networkSchema = new mongoose.Schema({
         required: true
     },
 
+    description: {
+        type: String,
+        required: false
+    },
+
     accessible: {
         type: String,
         required: true
