@@ -4,7 +4,7 @@ services:
     restart: always
     build: .
     ports:
-      - 9000:9000
+      - 80:9000
     volumes:
       - ./:/code
   mongo:
