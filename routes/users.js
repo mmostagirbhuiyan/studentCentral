@@ -79,7 +79,7 @@ router.post('/register', async (req, res) => {
 
     try {
         await user.save()
-        res.send(`User ${req.body.username} successfully registered!`)
+        res.send( {status: 200, "msg": `User ${req.body.username} successfully registered!`})
     }catch (err){
         res.send('Error' + err)
     }
