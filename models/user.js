@@ -1,12 +1,12 @@
 const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
-    firstName:{
+    username:{
         type: String,
         required: true
     },
 
-    lastName:{
+    password:{
         type: String,
         required: true
     },
@@ -40,12 +40,12 @@ const userSchema = new mongoose.Schema({
         },
     },
 
-    password:{
+    school:{
         type: String,
         required: true
     },
 
-    category:{
+    major:{
         type: String,
         required: true
     },

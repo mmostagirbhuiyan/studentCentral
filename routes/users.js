@@ -70,16 +70,16 @@ router.get('/homepage/:email/:getNetworks', async (req, res) => {
 
 router.post('/register', async (req, res) => {
     const user = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
+        username: req.body.username,
         password: req.body.password,
-        category: req.body.category,
+        email: req.body.email,
+        school: req.body.school,
+        major: req.body.major,
     })
 
     try {
         await user.save()
-        res.send(`User ${req.body.firstName} successfully registered!`)
+        res.send(`User ${req.body.username} successfully registered!`)
     }catch (err){
         res.send('Error' + err)
     }
@@ -92,22 +92,19 @@ router.patch('/updateUserProfile/:email', async (req, res) => {
         )
         let thisSession = req.body
         if(thisSession.hasOwnProperty('firstName')){
-            users.firstName = req.body.firstName
+            users.username = req.body.username
         }
         if(thisSession.hasOwnProperty('lastName')){
-            users.lastName = req.body.lastName
-        }
-        if(thisSession.hasOwnProperty('password')){
             users.password = req.body.password
         }
+        if(thisSession.hasOwnProperty('password')){
+            users.email = req.body.email
+        }
         if(thisSession.hasOwnProperty('category')){
-            users.category = req.body.category
+            users.school = req.body.school
         }
         if(thisSession.hasOwnProperty('dateOfBirth')){
-            users.dateOfBirth = req.body.dateOfBirth
-        }
-        if(thisSession.hasOwnProperty('phoneNumber')){
-            users.phoneNumber = req.body.phoneNumber
+            users.major = req.body.major
         }
         const u1 = await users.save()
         res.json(u1)
