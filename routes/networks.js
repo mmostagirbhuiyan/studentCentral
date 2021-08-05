@@ -10,8 +10,8 @@ router.get('/', async (req, res) => {
                 return {
                     name: value.name,
                     link: value.link,
-                    course: value.course,
-                    semester: value.semester
+                    school: value.school,
+                    major: value.major
                 }
             })
         };
