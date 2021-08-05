@@ -12,7 +12,7 @@ con.on('open', () => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello World, Team 5!')
+    res.send('Hello Professor Adam Bondi!')
 })
 
 app.use(express.json())
