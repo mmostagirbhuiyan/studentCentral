@@ -28,10 +28,10 @@ router.get('/login/:email/:password', async (req, res) => {
         const value = user.comparePassword(req.params.password);
 
         if (value === true){
-            res.send("Password is correct!")
+            res.json({status: 200, "message": "Password is correct!"})
         }
         else{
-            res.send("Password in incorrect!")
+            res.json({status: 403, "message": "Password is incorrect!"})
         }
     });
 })
