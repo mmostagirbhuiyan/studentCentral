@@ -5,18 +5,8 @@ const Network = require('../models/network')
 router.get('/', async (req, res) => {
     try {
         const networks = await Network.find()
-        var data = {
-            'networks': networks.map(function (value) {
-                return {
-                    name: value.name,
-                    link: value.link,
-                    school: value.school,
-                    major: value.major
-                }
-            })
-        };
         res.type('json')
-        res.json(data)
+        res.json(networks)
     }catch (err){
         res.send('Error' + err)
     }
@@ -44,22 +34,12 @@ router.post('/createNetwork', async (req, res) => {
     }
 })
 
-router.get('/findNetwork/:school', async (req, res) => {
-    var data = {
-        'networks': networks.map(function (value) {
-            return {
-                name: value.name,
-                link: value.link,
-                school: value.school,
-                major: value.major,
-            }
-        })
-    };
+router.get('/findNetworkBySchool/:school', async (req, res) => {
     try {
         const networks = await Network.find(
-            {'school': { $in: req.params.school}}
+            { 'school': { $in: req.params.school}}
         )
-        res.json(data)
+        res.json(networks)
     }catch (err){
         res.send('Error' + err)
     }
@@ -67,7 +47,7 @@ router.get('/findNetwork/:school', async (req, res) => {
 
 router.get('/findNetworkByName/:name', async (req, res) => {
     try {
-        const networks = await Network.find(
+        const networks = await Network.findOne(
             {'name': { $in: req.params.name}}
         )
         res.json(networks)
@@ -76,48 +56,5 @@ router.get('/findNetworkByName/:name', async (req, res) => {
     }
 })
 
-router.get('/findNetworkByCourse/:course', async (req, res) => {
-    try {
-        const networks = await Network.find(
-            {'course': { $in: req.params.course}}
-        )
-        var data = {
-            'networks': networks.map(function (value) {
-                return {
-                    name: value.name,
-                    link: value.link,
-                    course: value.course,
-                    semester: value.semester
-                }
-            })
-        };
-        res.type('json')
-        res.json(data)
-    }catch (err){
-        res.send('Error' + err)
-    }
-})
-
-router.get('/findNetworkBySemester/:semester', async (req, res) => {
-    try {
-        const networks = await Network.find(
-            {'semester': { $in: req.params.semester}}
-        )
-        var data = {
-            'networks': networks.map(function (value) {
-                return {
-                    name: value.name,
-                    link: value.link,
-                    course: value.course,
-                    semester: value.semester,
-                }
-            })
-        };
-        res.type('json')
-        res.json(data)
-    }catch (err){
-        res.send('Error' + err)
-    }
-})
 
 module.exports = router
