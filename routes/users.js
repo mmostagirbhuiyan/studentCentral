@@ -91,19 +91,19 @@ router.patch('/updateUserProfile/:email', async (req, res) => {
             {'email': { $in: req.params.email}}
         )
         let thisSession = req.body
-        if(thisSession.hasOwnProperty('firstName')){
+        if(thisSession.hasOwnProperty('username')){
             users.username = req.body.username
         }
-        if(thisSession.hasOwnProperty('lastName')){
+        if(thisSession.hasOwnProperty('password')){
             users.password = req.body.password
         }
-        if(thisSession.hasOwnProperty('password')){
+        if(thisSession.hasOwnProperty('email')){
             users.email = req.body.email
         }
-        if(thisSession.hasOwnProperty('category')){
+        if(thisSession.hasOwnProperty('school')){
             users.school = req.body.school
         }
-        if(thisSession.hasOwnProperty('dateOfBirth')){
+        if(thisSession.hasOwnProperty('major')){
             users.major = req.body.major
         }
         const u1 = await users.save()
