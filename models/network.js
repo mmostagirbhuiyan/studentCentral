@@ -29,13 +29,12 @@ const networkSchema = new mongoose.Schema({
         },
     },
 
-    course: {
+    school: {
         type: String,
-        uppercase: true,
         required: true
     },
 
-    semester: {
+    major: {
         type: String,
         required: true
     },
@@ -45,10 +44,6 @@ const networkSchema = new mongoose.Schema({
         required: false
     },
 
-    accessible: {
-        type: String,
-        required: true
-    },
 
     link: {
         type: String,

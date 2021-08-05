@@ -25,10 +25,9 @@ router.get('/', async (req, res) => {
 router.post('/createNetwork', async (req, res) => {
     const network = new Network({
         name: req.body.name,
-        course: req.body.course,
-        semester: req.body.semester,
+        school: req.body.school,
+        major: req.body.major,
         description: req.body.description,
-        accessible: req.body.accessible,
         link: req.body.link
     })
 
@@ -45,14 +44,23 @@ router.post('/createNetwork', async (req, res) => {
     }
 })
 
-router.get('/findNetwork/:course/:semester/:access', async (req, res) => {
+router.get('/findNetwork/:school/:major', async (req, res) => {
+    var data = {
+        'networks': networks.map(function (value) {
+            return {
+                name: value.name,
+                link: value.link,
+                school: value.school,
+                major: value.major,
+            }
+        })
+    };
     try {
         const networks = await Network.find(
-            {'course': { $in: req.params.course},
-            'semester': { $in: req.params.semester},
-            'accessible': { $in: req.params.access}}
+            {'school': { $in: req.params.school},
+            'major': { $in: req.params.major}}
         )
-        res.json(networks)
+        res.json(data)
     }catch (err){
         res.send('Error' + err)
     }
