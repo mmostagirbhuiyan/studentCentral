@@ -44,7 +44,7 @@ router.post('/createNetwork', async (req, res) => {
     }
 })
 
-router.get('/findNetwork/:school/:major', async (req, res) => {
+router.get('/findNetwork/:school', async (req, res) => {
     var data = {
         'networks': networks.map(function (value) {
             return {
@@ -57,8 +57,7 @@ router.get('/findNetwork/:school/:major', async (req, res) => {
     };
     try {
         const networks = await Network.find(
-            {'school': { $in: req.params.school},
-            'major': { $in: req.params.major}}
+            {'school': { $in: req.params.school}}
         )
         res.json(data)
     }catch (err){
